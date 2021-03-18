@@ -1,12 +1,12 @@
 {
-  "name": "@ant-design/bisheng-plugin",
-  "version": "2.3.1",
+  "name": "@gov-mo/bisheng-plugin",
+  "version": "2.3.1-alpha.2",
   "description": "To support ant.design-like websites.",
   "scripts": {
     "lint": "eslint ./src",
     "eslint-fix": "eslint --fix ./src",
     "babel": "babel ./src --out-dir ./lib",
-    "prepublishOnly": "npm run babel && cp ./src/template.html ./lib && np --yolo --no-publish",
+    "prepublishOnly": "npm run babel && cp ./src/template.html ./lib",
     "postpublish": "rm -rf lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -52,7 +52,6 @@
     "postcss": "^7.0.32",
     "postcss-pxtorem": "^5.1.1",
     "prismjs": "^1.16.0",
-    "react-router": "^5.1.2",
     "react-sublime-video": "^0.2.0",
     "sylvanas": "^0.6.0"
   },

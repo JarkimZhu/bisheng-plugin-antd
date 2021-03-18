@@ -13,10 +13,13 @@ function isZhCN(pathname) {
   return /-cn\/?$/.test(pathname);
 }
 
-function makeSureComonentsLink(pathname) {
-  const pathSnippets = pathname.split('#');
-  if (pathSnippets[0].indexOf('/components') > -1 && !pathSnippets[0].endsWith('/')) {
-    pathSnippets[0] = `${pathSnippets[0]}/`;
+function makeSureComonentsLink(href, pathname) {
+  const pathSnippets = href.split('#');
+  const path = pathSnippets[0];
+  if (path.indexOf('/components') > -1 && !path.endsWith('/')) {
+    pathSnippets[0] = `${path}/`;
+  } else if (pathname?.indexOf('jsapi/interfaces') > -1) {
+    pathSnippets[0] = `${path.substring(0, path.lastIndexOf('.md'))}`;
   }
   return pathSnippets.join('#');
 }
@@ -70,7 +73,8 @@ module.exports = (_, props) => ({
       const { href } = JsonML.getAttributes(node);
       return (
         <Link
-          to={isZhCN(props.location.pathname) ? toZhCNPathname(href) : makeSureComonentsLink(href)}
+          to={isZhCN(props.location.pathname)
+            ? toZhCNPathname(href) : makeSureComonentsLink(href, props.location.pathname)}
           key={index}
         >
           {toReactElement(JsonML.getChildren(node)[0])}
